@@ -4,7 +4,7 @@ HexVis - CLI Hex Visualizer
 This is a simple Hex visualizer for every kind of file.  
 This is a one day project and will be improved later on.  
 
-I not that experienced in C so if I can improve my code, just tell me or give me some advice :D
+I not that experienced in C for now so if I can improve my code, I would be glad to get some advice :D
 
 ## Install
 

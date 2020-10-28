@@ -15,7 +15,7 @@ git clone https://github.com/SL7/HexVis-CLI.git
 
 cd HexVis-CLI/
 
-make                    // Warnings might occur, just ignore
+make                                                        // Warnings might occur, just ignore
 
 bin/hexvis -h
 ```

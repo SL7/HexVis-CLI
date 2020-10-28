@@ -18,7 +18,10 @@ To install:
 git clone https://github.com/SL7/HexVis-CLI.git
 
 cd HexVis-CLI/
+```
+Before you run `make` remove everything inside the `bin/` folder
 
+```
 make                                                        // Warnings might occur, just ignore
 
 bin/hexvis -h

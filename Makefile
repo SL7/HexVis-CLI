@@ -3,21 +3,15 @@ CFLAGS	:= -Wall -Wextra -g
 
 BIN		:= bin
 SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
 
 LIBRARIES	:=
 
 ifeq ($(OS),Windows_NT)
 EXECUTABLE	:= hexvis.exe
 SOURCEDIRS	:= $(SRC)
-INCLUDEDIRS	:= $(INCLUDE)
-LIBDIRS		:= $(LIB)
 else
 EXECUTABLE	:= hexvis
 SOURCEDIRS	:= $(shell find $(SRC) -type d)
-INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
-LIBDIRS		:= $(shell find $(LIB) -type d)
 endif
 
 CINCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS:%/=%))

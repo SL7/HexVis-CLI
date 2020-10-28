@@ -102,11 +102,15 @@ int main(int argc, char **argv)
     char_buf = calloc(255, sizeof(char));
     printf("┌"); 
 
-    while (counter < WIDTH) {
-        printf("───");
+    while (counter < WIDTH+1) {
+        if ( counter == (WIDTH/2)) {
+            printf("─┬─");
+        } else {
+            printf("───");
+        }
         counter++;
     }
-    printf("─┬─");
+    printf("┬─");
     counter = 0;
     while (counter < WIDTH) {
         printf("─");
@@ -116,7 +120,21 @@ int main(int argc, char **argv)
     counter = 0;
     char *buf = calloc(255, sizeof(char));
     while ((c=fgetc(f)) != EOF) {
-        if (counter == WIDTH-1) {
+        if (counter == (WIDTH/2) - 1) {
+            if (isprint(c)) {    
+                char temp[1] = {c};
+                strcat(buf, temp);
+            } else {
+                char temp[1] = {'_'};
+                strcat(buf, temp);
+            }
+            if (c < 0x10) {
+                printf("0%x ¦ ", c);
+            } else {
+                printf("%x ¦ ",c);
+            }
+            counter++; 
+        } else if (counter == WIDTH-1) {
             if (c < 0x10) {
                 printf("0%x │", c);
             } else {
@@ -126,7 +144,7 @@ int main(int argc, char **argv)
             buf = calloc(255, sizeof(char));
             counter = 0;
         } else {
-            if (isprint(c)) {    
+            if (isprint(c)) { 
                 char temp[1] = {c};
                 strcat(buf, temp);
             } else {
@@ -144,6 +162,9 @@ int main(int argc, char **argv)
     
     while (counter < WIDTH) {
         printf("00 ");
+        if (counter == (WIDTH/2) - 1) {
+            printf("¦ ");
+        }
         counter++;
     }
     int len = strlen(buf);
@@ -152,10 +173,14 @@ int main(int argc, char **argv)
     printf(" │\n└─");
     counter = 0;
     while (counter < WIDTH) {
-        printf("───");
+        if ( counter == WIDTH/2) {
+            printf("┴─");
+        } else {
+            printf("───");
+        }
         counter++;
     }
-    printf("┴");
+    printf("───┴");
     counter = 0;
 
     while (counter < WIDTH) {

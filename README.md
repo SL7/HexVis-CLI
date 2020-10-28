@@ -6,7 +6,8 @@ This is a one day project and will be improved later on.
 
 I not that experienced in C for now so if I can improve my code, I would be glad to get some advice :D
 
-**Output**:
+**Output**:  
+
 ![](https://i.imgur.com/9yAtYxg.png)
 
 ## Install

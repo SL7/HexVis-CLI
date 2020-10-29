@@ -8,7 +8,7 @@ I not that experienced in C for now so if I can improve my code, I would be glad
 
 **Output**:  
 
-![](https://i.imgur.com/snBqitR.png)
+![](https://i.imgur.com/jhSjY36.png)
 
 ## Install
 

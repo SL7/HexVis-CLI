@@ -153,63 +153,65 @@ int main(int argc, char **argv)
     buf = calloc(255, sizeof(char));
     while ((c=fgetc(f)) != EOF) {
         if (counter == (WIDTH/2) - 1) {
-            if (isprint(c)) {    
-                char temp[1] = {c};
-                strcat(buf, temp);
+            char temp[1] = {(isprint(c)) ? c : '_'};
+            strcat(buf, (isprint(c)?ANSI_COLOR_GREEN:ANSI_COLOR_RED)); 
+            strcat(buf, temp);
+            strcat(buf, ANSI_COLOR_RESET);
+            if (isprint(c)) {
+                printf(ANSI_COLOR_RED);
+                printf((c<0x10)?"0%x"ANSI_COLOR_RESET" ¦ ":"%x"ANSI_COLOR_RESET" ¦ ",c);
             } else {
-                char temp[1] = {'_'};
-                strcat(buf, temp);
-            }
-            if (c < 0x10) {
-                printf("0%x ¦ ", c);
-            } else {
-                printf("%x ¦ ",c);
+                printf(ANSI_COLOR_GREEN);
+                printf((c<0x10)?"0%x"ANSI_COLOR_RESET" ¦ ":"%x"ANSI_COLOR_RESET" ¦ ",c);
             }
             counter++; 
         } else if (counter == WIDTH-1) {
-            if (c < 0x10) {
-                printf("0%x │", c);
+            if (isprint(c)) {
+                printf(ANSI_COLOR_GREEN);
+                printf((c<0x10)?"0%x" ANSI_COLOR_RESET " │":"%x"ANSI_COLOR_RESET" │", c);
             } else {
-                printf("%x │", c);
+                printf(ANSI_COLOR_RED);
+                printf((c<0x10)?"0%x"ANSI_COLOR_RESET" │":"%x"ANSI_COLOR_RESET" │", c);
             }
-            printf(" %s%c │\n│ ", buf, (!isprint(c))?'_':c);
+            printf(" %s", buf);
+            printf(isprint(c) ? ANSI_COLOR_GREEN : ANSI_COLOR_RED);
+            printf("%c"ANSI_COLOR_RESET" │\n│ ",(!isprint(c))?'_':c);
             buf = calloc(255, sizeof(char));
             counter = 0;
         } else {
-            if (isprint(c)) { 
-                char temp[1] = {c};
-                strcat(buf, temp);
+            char temp[1] = {(isprint(c)) ? c : '_'};
+            strcat(buf, (isprint(c)?ANSI_COLOR_GREEN:ANSI_COLOR_RED)); 
+            strcat(buf, temp);
+            strcat(buf, ANSI_COLOR_RESET);
+            if(isprint(c)) {
+                printf(ANSI_COLOR_GREEN);
+                printf((c<0x10)?"0%x ":"%x ", c);
+                printf(ANSI_COLOR_RESET);
             } else {
-                char temp[1] = {'_'};
-                strcat(buf, temp );
-            }
-            if (c < 0x10) {
-                printf("0%x ", c);
-            } else {
-                printf("%x ",c);
+                printf(ANSI_COLOR_RED);
+                printf((c<0x10)?"0%x ":"%x ", c);
+                printf(ANSI_COLOR_RESET);
             }
             counter++;
         }
     }
-    
+    int zero_count = 0; 
     while (counter < WIDTH) {
-        printf("00 ");
+        printf(ANSI_COLOR_YELLOW "00 " ANSI_COLOR_RESET);
         if (counter == (WIDTH/2) - 1) {
             printf("¦ ");
         }
+        zero_count++;
         counter++;
     }
-    int len = strlen(buf);
+    int len = strlen(buf); 
     printf("│ %s",  buf);
-    while ( len < WIDTH ) { printf(" ");len++; }
+    for (int i = 0; i < zero_count; i++) {printf(" ");}
+    //while ( len < WIDTH ) { printf(" ");len++; }
     printf(" │\n└─");
     counter = 0;
     while (counter < WIDTH) {
-        if ( counter == WIDTH/2) {
-            printf("┴─");
-        } else {
-            printf("───");
-        }
+        printf((counter==WIDTH/2)?"┴─":"───");
         counter++;
     }
     printf("───┴");

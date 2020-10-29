@@ -16,6 +16,15 @@
  */
 
 #define WIDTH 16
+#define TABLE_WIDTH 70
+
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 FILE *f, *out;
 
@@ -97,11 +106,34 @@ int main(int argc, char **argv)
     } 
     int c;
     uint8_t counter = 0;
-    char *hex_buf, *char_buf;
-    hex_buf = calloc(255, sizeof(char));
-    char_buf = calloc(255, sizeof(char));
     printf("┌"); 
+    for(int i = 0; i < TABLE_WIDTH; i++) {
+        printf("─");
+    }
+    printf("┐\n");
+    fseek(f, 0, SEEK_END);
+    long f_size = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    char *buf = calloc(255, sizeof(char));
+    sprintf(buf, "path: %s", filepath);
+    counter = strlen(buf);
+    printf("│ %s", buf);
+    while( counter < TABLE_WIDTH-1) {
+        printf(" ");
+        counter++;
+    }
+    printf("│\n│ ");
+    sprintf(buf, "size: %ld bytes", f_size); 
+    counter = strlen(buf);
+    printf("%s", buf);
+    while (counter < TABLE_WIDTH-1) {
+        printf(" ");
+        counter++;
+    }
+    counter = 0; 
+    printf("│\n├"); 
 
+    counter = 0;
     while (counter < WIDTH+1) {
         if ( counter == (WIDTH/2)) {
             printf("─┬─");
@@ -116,9 +148,9 @@ int main(int argc, char **argv)
         printf("─");
         counter++;
     }
-    printf("─┐\n│ ");
+    printf("─┤\n│ ");
     counter = 0;
-    char *buf = calloc(255, sizeof(char));
+    buf = calloc(255, sizeof(char));
     while ((c=fgetc(f)) != EOF) {
         if (counter == (WIDTH/2) - 1) {
             if (isprint(c)) {    
@@ -149,7 +181,7 @@ int main(int argc, char **argv)
                 strcat(buf, temp);
             } else {
                 char temp[1] = {'_'};
-                strcat(buf, temp);
+                strcat(buf, temp );
             }
             if (c < 0x10) {
                 printf("0%x ", c);
@@ -188,9 +220,6 @@ int main(int argc, char **argv)
         counter++;
     }
     printf("──┘\n");
-    fseek(f, 0, SEEK_END);
-    long size = ftell(f);
-    fseek(f, 0, SEEK_SET);
     counter = 0;
     fclose(f);
     printf("\n");

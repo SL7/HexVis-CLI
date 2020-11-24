@@ -47,6 +47,7 @@ int isFile(char *str);
 
 int main(int argc, char **argv)
 {
+    printf("Test");
     if (argc == 1) {
         printUsage();
         return 0;
@@ -153,7 +154,7 @@ int main(int argc, char **argv)
     buf = calloc(255, sizeof(char));
     while ((c=fgetc(f)) != EOF) {
         if (counter == (WIDTH/2) - 1) {
-            char temp[1] = {(isprint(c)) ? c : '_'};
+            char temp[1] = {(isprint(c)) ? c : '•'};
             strcat(buf, (isprint(c)?ANSI_COLOR_GREEN:ANSI_COLOR_RED)); 
             strcat(buf, temp);
             strcat(buf, ANSI_COLOR_RESET);

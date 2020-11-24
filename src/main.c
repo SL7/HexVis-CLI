@@ -47,7 +47,6 @@ int isFile(char *str);
 
 int main(int argc, char **argv)
 {
-    printf("Test");
     if (argc == 1) {
         printUsage();
         return 0;

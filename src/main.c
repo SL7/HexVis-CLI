@@ -1,3 +1,24 @@
+/**
+ * HexVis - simple Hex visualizer for all kinds of files
+ * @author: SL7
+ * @version: v1.2pre
+ * 
+ * This is a simple Hex visualizer for all kinds of files
+ * It was a 1 day project and development will continue soon.
+ *
+ * TODO:
+ *   - [ ] Add 'bytes to read' argument
+ *   - [ ] Make more efficient
+ * Changelog:
+ *   |__v1.0
+ *   |    |__ Initial Version
+ *   |__v1.1
+ *   |    |__ borders added
+ *   |    |__ colors added
+ *   |__v1.2pre
+ *   |    |__ added changelog
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>

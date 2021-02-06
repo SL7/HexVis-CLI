@@ -1,3 +1,24 @@
+/**
+ * HexVis - simple Hex visualizer for all kinds of files
+ * @author: SL7
+ * @version: v1.2pre
+ * 
+ * This is a simple Hex visualizer for all kinds of files
+ * It was a 1 day project and development will continue soon.
+ *
+ * TODO:
+ *   - [ ] Add 'bytes to read' argument
+ *   - [ ] Make more efficient
+ * Changelog:
+ *   |__v1.0
+ *   |    |__ Initial Version
+ *   |__v1.1
+ *   |    |__ borders added
+ *   |    |__ colors added
+ *   |__v1.2pre
+ *   |    |__ added changelog
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -152,7 +173,7 @@ int main(int argc, char **argv)
     buf = calloc(255, sizeof(char));
     while ((c=fgetc(f)) != EOF) {
         if (counter == (WIDTH/2) - 1) {
-            char temp[1] = {(isprint(c)) ? c : '_'};
+            char temp[1] = {(isprint(c)) ? c : '•'};
             strcat(buf, (isprint(c)?ANSI_COLOR_GREEN:ANSI_COLOR_RED)); 
             strcat(buf, temp);
             strcat(buf, ANSI_COLOR_RESET);

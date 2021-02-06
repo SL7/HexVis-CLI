@@ -15,8 +15,8 @@
  * hexvis -h
  */
 
-#define WIDTH 16
-#define TABLE_WIDTH 70
+#define WIDTH           16
+#define TABLE_WIDTH     70
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
@@ -25,7 +25,6 @@
 #define ANSI_COLOR_MAGENTA "\x1b[35m"
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
-
 FILE *f, *out;
 
 uint8_t config = 0x00;
@@ -159,19 +158,19 @@ int main(int argc, char **argv)
             strcat(buf, ANSI_COLOR_RESET);
             if (isprint(c)) {
                 printf(ANSI_COLOR_RED);
-                printf((c<0x10)?"0%x"ANSI_COLOR_RESET" ¦ ":"%x"ANSI_COLOR_RESET" ¦ ",c);
+                printf("%02x"ANSI_COLOR_RESET" ¦ ",c);
             } else {
                 printf(ANSI_COLOR_GREEN);
-                printf((c<0x10)?"0%x"ANSI_COLOR_RESET" ¦ ":"%x"ANSI_COLOR_RESET" ¦ ",c);
+                printf("%02x"ANSI_COLOR_RESET" ¦ ",c);
             }
             counter++; 
         } else if (counter == WIDTH-1) {
             if (isprint(c)) {
                 printf(ANSI_COLOR_GREEN);
-                printf((c<0x10)?"0%x" ANSI_COLOR_RESET " │":"%x"ANSI_COLOR_RESET" │", c);
+                printf("%02x"ANSI_COLOR_RESET" │", c);
             } else {
                 printf(ANSI_COLOR_RED);
-                printf((c<0x10)?"0%x"ANSI_COLOR_RESET" │":"%x"ANSI_COLOR_RESET" │", c);
+                printf("%02x"ANSI_COLOR_RESET" │", c);
             }
             printf(" %s", buf);
             printf(isprint(c) ? ANSI_COLOR_GREEN : ANSI_COLOR_RED);
@@ -185,11 +184,11 @@ int main(int argc, char **argv)
             strcat(buf, ANSI_COLOR_RESET);
             if(isprint(c)) {
                 printf(ANSI_COLOR_GREEN);
-                printf((c<0x10)?"0%x ":"%x ", c);
+                printf("%02x ", c);
                 printf(ANSI_COLOR_RESET);
             } else {
                 printf(ANSI_COLOR_RED);
-                printf((c<0x10)?"0%x ":"%x ", c);
+                printf("%02x ", c);
                 printf(ANSI_COLOR_RESET);
             }
             counter++;
